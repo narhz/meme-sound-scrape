@@ -2,9 +2,6 @@ from bs4 import BeautifulSoup as bs
 import requests
 import os
 
-from pprint import pprint
-
-
 
 
 BASE_URL = 'https://www.myinstants.com'
@@ -51,15 +48,12 @@ def create_dir():
 
 def run():
     create_dir()
-
     page_num = 1
     while True:
         page = get_page(page_num)
         links = get_links(page)
-
         if not links:
             break
-
         for link in links:
             dl_link(link)
 
