@@ -19,13 +19,11 @@ def get_links(soup_obj):
     for a_tag in soup_obj.find_all('a', class_='instant-link'):
         req = requests.get(BASE_URL + a_tag['href']).content
         name = a_tag.text + '.mp3'
-
         for char in forbid:
             if char in name:
                 name = name.replace(char, '')
 
         buttons = bs(req, 'html.parser').find_all('a', class_='waves-effect waves-light btn blue white-text')
-        
         for button in buttons:
             if button.text == 'Download MP3':
                 links.append({'name': name, 'link': BASE_URL + button['href']})
